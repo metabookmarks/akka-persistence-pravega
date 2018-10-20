@@ -9,8 +9,9 @@ lazy val `akka-persistence-pravega` =
     .settings(settings)
     .settings(
       libraryDependencies ++= Seq(
+        library.pravega,
         library.scalaCheck % Test,
-        library.utest      % Test
+        library.scalaTest      % Test
       )
     )
 
@@ -21,11 +22,13 @@ lazy val `akka-persistence-pravega` =
 lazy val library =
   new {
     object Version {
-      val scalaCheck = "1.14.0"
-      val utest      = "0.6.6"
+      val pravega        = "0.3.2"
+      val scalaCheck     = "1.14.0"
+      val scalaTest      = "3.0.5"
     }
+    val pravega    = "io.pravega" % "pravega-client" % Version.pravega
     val scalaCheck = "org.scalacheck" %% "scalacheck" % Version.scalaCheck
-    val utest      = "com.lihaoyi"    %% "utest"      % Version.utest
+    val scalaTest  = "org.scalatest"    %% "scalatest"      % Version.scalaTest
   }
 
 // *****************************************************************************
