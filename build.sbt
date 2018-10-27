@@ -9,10 +9,11 @@ lazy val `akka-persistence-pravega` =
     .settings(settings)
     .settings(
       libraryDependencies ++= Seq(
+        library.logback,
         library.pravega,
         library.scalaCheck % Test,
         library.scalaTest      % Test
-      )
+      ) ++ library.akka
     )
 
 // *****************************************************************************
@@ -25,7 +26,13 @@ lazy val library =
       val pravega        = "0.3.2"
       val scalaCheck     = "1.14.0"
       val scalaTest      = "3.0.5"
+      val logback        = "1.1.3"
+      val akka           = "2.5.17"
     }
+    val logback = "ch.qos.logback"       % "logback-classic"             % Version.logback         % "test"
+    val akka = Seq("com.typesafe.akka"   %% "akka-testkit"                % Version.akka            % "test",
+    "com.typesafe.akka"   %% "akka-persistence"            % Version.akka            % "compile",
+    "com.typesafe.akka"   %% "akka-persistence-tck"        % Version.akka            % "test")
     val pravega    = "io.pravega" % "pravega-client" % Version.pravega
     val scalaCheck = "org.scalacheck" %% "scalacheck" % Version.scalaCheck
     val scalaTest  = "org.scalatest"    %% "scalatest"      % Version.scalaTest
